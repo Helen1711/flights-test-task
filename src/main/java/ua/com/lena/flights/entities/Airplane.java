@@ -28,15 +28,14 @@ public class Airplane extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @NotNull
     private AirplaneType type;
-    @Column(name = "created_at")
-    private LocalDate createdAt;
 
     public Airplane() {
     }
 
-    public Airplane(@Size(min = 3, max = 20) @NotNull String name, @NotNull String factorySerialNumber,
-                    Aircompany aircompany, @NotNull int numberOfFlights, @NotNull double flightDistance,
-                    @NotNull int fuelCapacity, @NotNull AirplaneType type, LocalDate createdAt) {
+    public Airplane(LocalDate createdAt, @Size(min = 3, max = 20) @NotNull String name,
+                    @NotNull String factorySerialNumber, Aircompany aircompany, @NotNull int numberOfFlights,
+                    @NotNull double flightDistance, @NotNull int fuelCapacity, @NotNull AirplaneType type) {
+        super(createdAt);
         this.name = name;
         this.factorySerialNumber = factorySerialNumber;
         this.aircompany = aircompany;
@@ -44,7 +43,18 @@ public class Airplane extends AbstractEntity {
         this.flightDistance = flightDistance;
         this.fuelCapacity = fuelCapacity;
         this.type = type;
-        this.createdAt = createdAt;
+    }
+
+    public Airplane(@Size(min = 3, max = 20) @NotNull String name, @NotNull String factorySerialNumber,
+                    Aircompany aircompany, @NotNull int numberOfFlights, @NotNull double flightDistance,
+                    @NotNull int fuelCapacity, @NotNull AirplaneType type) {
+        this.name = name;
+        this.factorySerialNumber = factorySerialNumber;
+        this.aircompany = aircompany;
+        this.numberOfFlights = numberOfFlights;
+        this.flightDistance = flightDistance;
+        this.fuelCapacity = fuelCapacity;
+        this.type = type;
     }
 
     public String getName() {
@@ -101,13 +111,5 @@ public class Airplane extends AbstractEntity {
 
     public void setType(AirplaneType type) {
         this.type = type;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
     }
 }

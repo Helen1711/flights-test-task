@@ -16,16 +16,14 @@ public class Aircompany extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @NotNull
     private AircompanyType type;
-    @Column(name = "founded_at")
-    private LocalDate foundedAt;
 
     public Aircompany() {
     }
 
-    public Aircompany(@Size(min = 3, max = 20) String name, @NotNull AircompanyType type, LocalDate foundedAt) {
+    public Aircompany(LocalDate createdAt, @Size(min = 3, max = 20) String name, @NotNull AircompanyType type) {
+        super(createdAt);
         this.name = name;
         this.type = type;
-        this.foundedAt = foundedAt;
     }
 
     public String getName() {
@@ -42,13 +40,5 @@ public class Aircompany extends AbstractEntity {
 
     public void setType(AircompanyType type) {
         this.type = type;
-    }
-
-    public LocalDate getFoundedAt() {
-        return foundedAt;
-    }
-
-    public void setFoundedAt(LocalDate foundedAt) {
-        this.foundedAt = foundedAt;
     }
 }
