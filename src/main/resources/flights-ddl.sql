@@ -5,7 +5,7 @@ create table aircompany
 (
     id         bigint primary key auto_increment,
     created_at date,
-    name       varchar(255),
+    name       varchar(255) unique,
     type       enum ('LOW_COST', 'CHARTER', 'SCHEDULED')
 );
 
@@ -13,7 +13,7 @@ create table airplane
 (
     id                    bigint primary key auto_increment,
     created_at            date,
-    factory_serial_number varchar(255),
+    factory_serial_number varchar(255) unique,
     flight_distance       double,
     fuel_capacity         integer,
     name                  varchar(255),
