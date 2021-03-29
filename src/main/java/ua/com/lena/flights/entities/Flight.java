@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class Flight extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @NotNull
-    private FlightStatus status;
+    private FlightStatus status = FlightStatus.PENDING;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aircompany_id")
     @NotNull
@@ -45,12 +45,11 @@ public class Flight extends AbstractEntity {
     public Flight() {
     }
 
-    public Flight(LocalDate createdAt, @NotNull FlightStatus status, @NotNull Aircompany aircompany,
-                  @NotNull Airplane airplane, @NotNull String departureCountry, @NotNull String destinationCountry,
-                  @Positive double distance, @NotNull LocalTime estimatedFlightTime, @NotNull LocalDateTime endedAt,
+    public Flight(LocalDate createdAt, @NotNull Aircompany aircompany, @NotNull Airplane airplane,
+                  @NotNull String departureCountry, @NotNull String destinationCountry, @Positive double distance,
+                  @NotNull LocalTime estimatedFlightTime, @NotNull LocalDateTime endedAt,
                   @NotNull LocalDateTime delayStartedAt) {
         super(createdAt);
-        this.status = status;
         this.aircompany = aircompany;
         this.airplane = airplane;
         this.departureCountry = departureCountry;

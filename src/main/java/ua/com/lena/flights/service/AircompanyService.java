@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AircompanyService {
-    Aircompany save(Aircompany aircompany);
+    void save(Aircompany aircompany);
 
     List<Aircompany> getAll();
 
