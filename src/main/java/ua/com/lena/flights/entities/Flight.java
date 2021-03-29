@@ -1,5 +1,7 @@
 package ua.com.lena.flights.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -15,10 +17,12 @@ public class Flight extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aircompany_id")
     @NotNull
+    @JsonIgnore
     private Aircompany aircompany;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "airplane_id")
     @NotNull
+    @JsonIgnore
     private Airplane airplane;
     @Column(name = "departure_country")
     @NotNull
@@ -43,7 +47,7 @@ public class Flight extends AbstractEntity {
 
     public Flight(LocalDate createdAt, @NotNull FlightStatus status, @NotNull Aircompany aircompany,
                   @NotNull Airplane airplane, @NotNull String departureCountry, @NotNull String destinationCountry,
-                  @NotNull double distance, @NotNull LocalTime estimatedFlightTime, @NotNull LocalDateTime endedAt,
+                  @Positive double distance, @NotNull LocalTime estimatedFlightTime, @NotNull LocalDateTime endedAt,
                   @NotNull LocalDateTime delayStartedAt) {
         super(createdAt);
         this.status = status;
