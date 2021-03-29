@@ -32,7 +32,7 @@ public class AircompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<Aircompany> create(@RequestBody @Valid Aircompany aircompany) {
+    public ResponseEntity create(@RequestBody @Valid Aircompany aircompany) {
         if (service.getByName(aircompany.getName()).isPresent()) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }

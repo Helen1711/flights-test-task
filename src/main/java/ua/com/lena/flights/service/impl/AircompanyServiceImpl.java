@@ -17,8 +17,8 @@ public class AircompanyServiceImpl implements AircompanyService {
     }
 
     @Override
-    public Aircompany save(Aircompany aircompany) {
-        return repository.save(aircompany);
+    public void save(Aircompany aircompany) {
+        repository.save(aircompany);
     }
 
     @Override

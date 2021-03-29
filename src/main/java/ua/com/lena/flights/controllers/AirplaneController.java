@@ -24,11 +24,11 @@ public class AirplaneController {
     }
 
     @PostMapping("/airplanes")
-    public ResponseEntity<Airplane> create(@RequestParam long companyId, @RequestBody @Valid Airplane airplane) {
+    public ResponseEntity create(@RequestParam long companyId, @RequestBody @Valid Airplane airplane) {
         if (service.getBySerialNumber(airplane.getFactorySerialNumber()).isPresent()) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        Airplane savedAirplane = service.save(companyId, airplane);
-        return new ResponseEntity(savedAirplane, HttpStatus.CREATED);
+        service.save(companyId, airplane);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

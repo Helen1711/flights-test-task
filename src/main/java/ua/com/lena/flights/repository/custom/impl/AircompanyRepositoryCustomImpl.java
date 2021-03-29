@@ -18,9 +18,9 @@ public class AircompanyRepositoryCustomImpl implements AircompanyRepositoryCusto
     @Override
     public int drop(long id) {
         return entityManager
-                .createNativeQuery("delete from flightsTestTask.aircompany where id = ? and " +
-                        "not exists(select * from flightsTestTask.flight where aircompany_id = ?) and " +
-                        "not exists(select * from flightsTestTask.airplane where aircompany_id = ?)")
+                .createNativeQuery("delete from aircompany where id = ? and " +
+                        "not exists(select * from flight where aircompany_id = ?) and " +
+                        "not exists(select * from airplane where aircompany_id = ?)")
                 .setParameter(1, id)
                 .setParameter(2, id)
                 .setParameter(3, id)
