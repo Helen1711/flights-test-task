@@ -1,7 +1,8 @@
-package ua.com.lena.flights.repository.custom;
+package ua.com.lena.flights.repository.custom.impl;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ua.com.lena.flights.repository.custom.AircompanyRepositoryCustom;
 
 import javax.persistence.EntityManager;
 
