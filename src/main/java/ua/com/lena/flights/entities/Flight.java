@@ -2,6 +2,7 @@ package ua.com.lena.flights.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,7 +26,7 @@ public class Flight extends AbstractEntity {
     @Column(name = "destination_country")
     @NotNull
     private String destinationCountry;
-    @NotNull
+    @Positive
     private double distance;
     @Column(name = "estimated_flight_time")
     @NotNull

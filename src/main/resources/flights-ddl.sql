@@ -1,41 +1,41 @@
-create database if not exists flightsTestTask;
-use flightsTestTask;
+CREATE DATABASE IF NOT EXISTS flightsTestTask;
+USE flightsTestTask;
 
-create table aircompany
+CREATE TABLE aircompany
 (
-    id         bigint primary key auto_increment,
-    created_at date,
-    name       varchar(255) unique,
+    id         BIGINT PRIMARY KEY AUTO_INCREMENT,
+    created_at DATE,
+    name       VARCHAR(255) UNIQUE ,
     type       enum ('LOW_COST', 'CHARTER', 'SCHEDULED')
 );
 
-create table airplane
+CREATE TABLE airplane
 (
-    id                    bigint primary key auto_increment,
-    created_at            date,
-    factory_serial_number varchar(255) unique,
-    flight_distance       double,
-    fuel_capacity         integer,
-    name                  varchar(255),
-    number_of_flights     integer,
-    type                  enum ('CARGO', 'PASSENGER'),
-    aircompany_id         bigint,
-    FOREIGN KEY (aircompany_id) references aircompany (id)
+    id                    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    created_at            DATE,
+    factory_serial_number VARCHAR(255) UNIQUE ,
+    flight_distance       DOUBLE,
+    fuel_capacity         INTEGER,
+    name                  VARCHAR(255),
+    number_of_flights     INTEGER,
+    type                  ENUM ('CARGO', 'PASSENGER'),
+    aircompany_id         BIGINT,
+    FOREIGN KEY (aircompany_id) REFERENCES aircompany (id)
 );
 
-create table flight
+CREATE TABLE flight
 (
-    id                    bigint primary key auto_increment,
-    created_at            date,
-    delay_started_at      datetime,
-    departure_country     varchar(255),
-    destination_country   varchar(255),
-    distance              double precision not null,
-    ended_at              datetime,
-    estimated_flight_time time,
-    status                enum ('ACTIVE', 'COMPLETED', 'DELAYED', 'PENDING'),
-    aircompany_id         bigint,
-    airplane_id           bigint,
-    FOREIGN KEY (aircompany_id) references aircompany (id),
-    FOREIGN KEY (airplane_id) references airplane (id)
+    id                    BIGINT PRIMARY KEY AUTO_INCREMENT,
+    created_at            DATE,
+    delay_started_at      DATETIME,
+    departure_country     VARCHAR(255),
+    destination_country   VARCHAR(255),
+    distance              DOUBLE,
+    ended_at              DATETIME,
+    estimated_flight_time TIME,
+    status                ENUM ('ACTIVE', 'COMPLETED', 'DELAYED', 'PENDING'),
+    aircompany_id         BIGINT,
+    airplane_id           BIGINT,
+    FOREIGN KEY (aircompany_id) REFERENCES aircompany (id),
+    FOREIGN KEY (airplane_id) REFERENCES airplane (id)
 );
