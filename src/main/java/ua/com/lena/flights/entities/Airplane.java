@@ -2,6 +2,8 @@ package ua.com.lena.flights.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -17,13 +19,13 @@ public class Airplane extends AbstractEntity {
     @JoinColumn(name = "aircompany_id")
     private Aircompany aircompany;
     @Column(name = "number_of_flights")
-    @NotNull
+    @PositiveOrZero
     private int numberOfFlights;
     @Column(name = "flight_distance")
-    @NotNull
+    @Positive
     private double flightDistance;
     @Column(name = "fuel_capacity")
-    @NotNull
+    @Positive
     private int fuelCapacity;
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -33,21 +35,9 @@ public class Airplane extends AbstractEntity {
     }
 
     public Airplane(LocalDate createdAt, @Size(min = 3, max = 20) @NotNull String name,
-                    @NotNull String factorySerialNumber, Aircompany aircompany, @NotNull int numberOfFlights,
-                    @NotNull double flightDistance, @NotNull int fuelCapacity, @NotNull AirplaneType type) {
+                    @NotNull String factorySerialNumber, Aircompany aircompany, @PositiveOrZero int numberOfFlights,
+                    @Positive double flightDistance, @Positive int fuelCapacity, @NotNull AirplaneType type) {
         super(createdAt);
-        this.name = name;
-        this.factorySerialNumber = factorySerialNumber;
-        this.aircompany = aircompany;
-        this.numberOfFlights = numberOfFlights;
-        this.flightDistance = flightDistance;
-        this.fuelCapacity = fuelCapacity;
-        this.type = type;
-    }
-
-    public Airplane(@Size(min = 3, max = 20) @NotNull String name, @NotNull String factorySerialNumber,
-                    Aircompany aircompany, @NotNull int numberOfFlights, @NotNull double flightDistance,
-                    @NotNull int fuelCapacity, @NotNull AirplaneType type) {
         this.name = name;
         this.factorySerialNumber = factorySerialNumber;
         this.aircompany = aircompany;
