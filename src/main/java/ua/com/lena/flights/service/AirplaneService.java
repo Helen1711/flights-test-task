@@ -9,7 +9,7 @@ public interface AirplaneService {
 
     Optional<Airplane> getById(long id);
 
-    void save(long companyId, Airplane airplane);
+    Airplane save(long companyId, Airplane airplane);
 
     Optional<Airplane> getBySerialNumber(String serialNumber);
 }
