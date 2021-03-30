@@ -29,6 +29,6 @@ public class AirplaneController {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
         Airplane savedAirplane = service.save(companyId, airplane);
-        return new ResponseEntity(airplane, HttpStatus.CREATED);
+        return new ResponseEntity(savedAirplane, HttpStatus.CREATED);
     }
 }

@@ -41,7 +41,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void save(long companyId, long airplaneId, Flight flight) {
+    public Flight save(long companyId, long airplaneId, Flight flight) {
         var aircompany = aircompanyService.getById(companyId)
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", companyId))
@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
                 );
         flight.setAircompany(aircompany);
         flight.setAirplane(airplane);
-        repository.save(flight);
+        return repository.save(flight);
     }
 
     @Override

@@ -12,7 +12,7 @@ public interface FlightService {
 
     List<Flight> getAllByStatusAndStartedTime(FlightStatus status, LocalDateTime time);
 
-    void save(long companyId, long airplaneId, Flight flight);
+    Flight save(long companyId, long airplaneId, Flight flight);
 
     void changeFlightStatus(long id, FlightStatus status);
 

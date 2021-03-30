@@ -34,10 +34,10 @@ public class FlightController {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid Flight flight, @RequestParam long companyId,
+    public ResponseEntity<Flight> create(@RequestBody @Valid Flight flight, @RequestParam long companyId,
                                          @RequestParam long airplaneId){
-        service.save(companyId, airplaneId, flight);
-        return new ResponseEntity(HttpStatus.CREATED);
+        Flight savedFlight = service.save(companyId, airplaneId, flight);
+        return new ResponseEntity(savedFlight, HttpStatus.CREATED);
     }
 
     @PatchMapping("/status")
