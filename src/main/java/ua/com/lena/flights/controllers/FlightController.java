@@ -34,9 +34,17 @@ public class FlightController {
     }
 
     @PostMapping
-    public ResponseEntity<Flight> create(@RequestBody @Valid Flight flight, @RequestParam long companyId,
+    public ResponseEntity create(@RequestBody @Valid Flight flight, @RequestParam long companyId,
                                          @RequestParam long airplaneId){
         service.save(companyId, airplaneId, flight);
         return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/status")
+    public void changeStatus(@RequestParam FlightStatus status, @RequestParam long id){
+        service.getById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+        service.changeFlightStatus(id, status);
     }
 }
