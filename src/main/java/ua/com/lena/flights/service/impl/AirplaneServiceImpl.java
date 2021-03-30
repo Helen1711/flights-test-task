@@ -41,10 +41,10 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    public void save(long companyId, Airplane airplane) {
+    public Airplane save(long companyId, Airplane airplane) {
         var aircompany = getAircompanyById(companyId);
         airplane.setAircompany(aircompany);
-        repository.save(airplane);
+        return repository.save(airplane);
     }
 
     @Override
