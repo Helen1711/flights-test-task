@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.lena.flights.entities.Aircompany;
+import ua.com.lena.flights.entities.Airplane;
 import ua.com.lena.flights.service.AircompanyService;
 
 import javax.validation.Valid;
@@ -32,12 +33,12 @@ public class AircompanyController {
     }
 
     @PostMapping
-    public ResponseEntity create(@RequestBody @Valid Aircompany aircompany) {
+    public ResponseEntity<Airplane> create(@RequestBody @Valid Aircompany aircompany) {
         if (service.getByName(aircompany.getName()).isPresent()) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        service.save(aircompany);
-        return new ResponseEntity(HttpStatus.CREATED);
+        Aircompany savedAircompany = service.save(aircompany);
+        return new ResponseEntity(savedAircompany, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
