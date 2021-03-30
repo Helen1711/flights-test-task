@@ -48,7 +48,7 @@ public class FlightController {
         service.changeFlightStatus(id, status);
     }
 
-    @GetMapping("/delayed")
+    @GetMapping("/delayed=true")
     public List<Flight> getFlightsWhereEstimatedTimeBigger(){
         return service.getAllWhereEstimatedTimeBiggerThanActual();
     }

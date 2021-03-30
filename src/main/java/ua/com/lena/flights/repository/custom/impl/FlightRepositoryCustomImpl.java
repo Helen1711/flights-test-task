@@ -32,7 +32,7 @@ public class FlightRepositoryCustomImpl implements FlightRepositoryCustom {
     public List<Flight> findAllWhereEstimatedTimeBiggerThanActual() {
         return entityManager.createQuery(
                 "select f from Flight f where f.status = 'COMPLETED' " +
-                        "and TIMESTAMPDIFF(second, ended_at, delay_started_at) > estimated_flight_time"
+                        "and TIMESTAMPDIFF(second, delay_started_at, ended_at) > estimated_flight_time"
         ).getResultList();
     }
 }
