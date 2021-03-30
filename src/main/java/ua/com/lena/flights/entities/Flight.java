@@ -36,19 +36,16 @@ public class Flight extends AbstractEntity {
     @NotNull
     private LocalTime estimatedFlightTime;
     @Column(name = "ended_at")
-    @NotNull
     private LocalDateTime endedAt;
     @Column(name = "delay_started_at")
-    @NotNull
     private LocalDateTime delayStartedAt;
 
     public Flight() {
     }
 
     public Flight(LocalDate createdAt, @NotNull Aircompany aircompany, @NotNull Airplane airplane,
-                  @NotNull String departureCountry, @NotNull String destinationCountry, @Positive double distance,
-                  @NotNull LocalTime estimatedFlightTime, @NotNull LocalDateTime endedAt,
-                  @NotNull LocalDateTime delayStartedAt) {
+                  @NotNull String departureCountry, @NotNull String destinationCountry,
+                  @Positive double distance, @NotNull LocalTime estimatedFlightTime) {
         super(createdAt);
         this.aircompany = aircompany;
         this.airplane = airplane;
@@ -56,8 +53,6 @@ public class Flight extends AbstractEntity {
         this.destinationCountry = destinationCountry;
         this.distance = distance;
         this.estimatedFlightTime = estimatedFlightTime;
-        this.endedAt = endedAt;
-        this.delayStartedAt = delayStartedAt;
     }
 
     public FlightStatus getStatus() {

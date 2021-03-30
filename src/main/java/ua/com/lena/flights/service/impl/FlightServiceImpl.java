@@ -8,9 +8,11 @@ import ua.com.lena.flights.repository.FlightRepository;
 import ua.com.lena.flights.service.AircompanyService;
 import ua.com.lena.flights.service.AirplaneService;
 import ua.com.lena.flights.service.FlightService;
+import ua.com.lena.flights.service.util.StatusFactory;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightServiceImpl implements FlightService {
@@ -51,5 +53,18 @@ public class FlightServiceImpl implements FlightService {
         flight.setAircompany(aircompany);
         flight.setAirplane(airplane);
         repository.save(flight);
+    }
+
+    @Override
+    public void changeFlightStatus(long id, FlightStatus status) {
+        var flight = repository.getOne(id);
+        StatusFactory.getStatus(status)
+                .changeStatus(flight);
+        repository.save(flight);
+    }
+
+    @Override
+    public Optional<Flight> getById(long id) {
+        return repository.findById(id);
     }
 }
