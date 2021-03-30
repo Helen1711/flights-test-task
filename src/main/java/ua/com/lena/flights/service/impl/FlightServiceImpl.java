@@ -1,8 +1,6 @@
 package ua.com.lena.flights.service.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.lena.flights.entities.Aircompany;
-import ua.com.lena.flights.entities.Airplane;
 import ua.com.lena.flights.entities.Flight;
 import ua.com.lena.flights.entities.FlightStatus;
 import ua.com.lena.flights.exceptions.EntityNotFoundException;
@@ -11,6 +9,7 @@ import ua.com.lena.flights.service.AircompanyService;
 import ua.com.lena.flights.service.AirplaneService;
 import ua.com.lena.flights.service.FlightService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,17 +34,17 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> getAllByStatusAndStartedTime() {
-        return repository.findByStatusAndStartedTime();
+    public List<Flight> getAllByStatusAndStartedTime(FlightStatus status, LocalDateTime time) {
+        return repository.findByStatusAndStartedTime(status, time);
     }
 
     @Override
     public void save(long companyId, long airplaneId, Flight flight) {
-        Aircompany aircompany = aircompanyService.getById(companyId)
+        var aircompany = aircompanyService.getById(companyId)
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", companyId))
                 );
-        Airplane airplane = airplaneService.getById(airplaneId)
+        var airplane = airplaneService.getById(airplaneId)
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Airplane with id + %d not found", airplaneId))
                 );
