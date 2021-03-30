@@ -47,4 +47,9 @@ public class FlightController {
                 .orElse(ResponseEntity.notFound().build());
         service.changeFlightStatus(id, status);
     }
+
+    @GetMapping("/delayed")
+    public List<Flight> getFlightsWhereEstimatedTimeBigger(){
+        return service.getAllWhereEstimatedTimeBiggerThanActual();
+    }
 }

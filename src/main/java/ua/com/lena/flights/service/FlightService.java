@@ -17,4 +17,6 @@ public interface FlightService {
     void changeFlightStatus(long id, FlightStatus status);
 
     Optional<Flight> getById(long id);
+
+    List<Flight> getAllWhereEstimatedTimeBiggerThanActual();
 }

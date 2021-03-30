@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface FlightRepositoryCustom {
     List<Flight> findByStatusAndStartedTime(FlightStatus status, LocalDateTime time);
+
+    List<Flight> findAllWhereEstimatedTimeBiggerThanActual();
 }
