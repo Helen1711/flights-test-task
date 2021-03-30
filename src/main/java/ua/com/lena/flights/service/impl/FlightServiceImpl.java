@@ -67,4 +67,9 @@ public class FlightServiceImpl implements FlightService {
     public Optional<Flight> getById(long id) {
         return repository.findById(id);
     }
+
+    @Override
+    public List<Flight> getAllWhereEstimatedTimeBiggerThanActual() {
+        return repository.findAllWhereEstimatedTimeBiggerThanActual();
+    }
 }
