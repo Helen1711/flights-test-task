@@ -8,6 +8,7 @@ import ua.com.lena.flights.entities.FlightStatus;
 import ua.com.lena.flights.service.FlightService;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @CrossOrigin
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping("/api/v1/flights")
 public class FlightController {
     private final FlightService service;
+    private static final FlightStatus status = FlightStatus.ACTIVE;
+    private static final LocalDateTime time = LocalDateTime.now().minusDays(1);
 
     public FlightController(FlightService service) {
         this.service = service;
@@ -27,7 +30,7 @@ public class FlightController {
 
     @GetMapping("/active")
     public List<Flight> getFlightsByStatusAndStartedTime(){
-        return service.getAllByStatusAndStartedTime();
+        return service.getAllByStatusAndStartedTime(status, time);
     }
 
     @PostMapping

@@ -22,12 +22,12 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public Airplane changeAircompany(long airplaneId, long companyId) {
-        Airplane airplane = getById(airplaneId)
+        var airplane = getById(airplaneId)
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Airplane with id + %d not found", airplaneId))
                 );
 
-        Aircompany aircompany = aircompanyService.getById(companyId)
+        var aircompany = aircompanyService.getById(companyId)
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", companyId))
                 );
@@ -42,7 +42,7 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public void save(long companyId, Airplane airplane) {
-        Aircompany aircompany = getAircompanyById(companyId);
+        var aircompany = getAircompanyById(companyId);
         airplane.setAircompany(aircompany);
         repository.save(airplane);
     }

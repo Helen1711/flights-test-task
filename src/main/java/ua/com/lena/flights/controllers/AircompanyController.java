@@ -52,7 +52,7 @@ public class AircompanyController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        if (!service.getById(id).isPresent()) {
+        if (service.getById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         if (service.remove(id) > 0) {
