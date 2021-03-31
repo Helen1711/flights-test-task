@@ -5,7 +5,6 @@ import ua.com.lena.flights.entities.FlightStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface FlightService {
     List<Flight> getAllByStatusAndAircompanyName(FlightStatus status, String name);
@@ -14,9 +13,9 @@ public interface FlightService {
 
     Flight save(long companyId, long airplaneId, Flight flight);
 
-    void changeFlightStatus(long id, FlightStatus status);
+    Flight getById(long id);
 
-    Optional<Flight> getById(long id);
+    void changeFlightStatus(long id, FlightStatus status);
 
     List<Flight> getAllWhereEstimatedTimeBiggerThanActual();
 }

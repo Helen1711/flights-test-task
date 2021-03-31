@@ -1,14 +1,12 @@
 package ua.com.lena.flights.service.impl;
 
 import org.springframework.stereotype.Service;
-import ua.com.lena.flights.entities.Aircompany;
 import ua.com.lena.flights.entities.Airplane;
+import ua.com.lena.flights.exceptions.AirplaneDuplicateSerialNumberException;
 import ua.com.lena.flights.exceptions.EntityNotFoundException;
 import ua.com.lena.flights.repository.AirplaneRepository;
 import ua.com.lena.flights.service.AircompanyService;
 import ua.com.lena.flights.service.AirplaneService;
-
-import java.util.Optional;
 
 @Service
 public class AirplaneServiceImpl implements AirplaneService {
@@ -22,39 +20,31 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public Airplane changeAircompany(long airplaneId, long companyId) {
-        var airplane = getById(airplaneId)
-                .orElseThrow(
-                        () -> new EntityNotFoundException(String.format("Airplane with id + %d not found", airplaneId))
-                );
-
-        var aircompany = aircompanyService.getById(companyId)
-                .orElseThrow(
-                        () -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", companyId))
-                );
+        var airplane = getById(airplaneId);
+        var aircompany = aircompanyService.getById(companyId);
         airplane.setAircompany(aircompany);
         return repository.save(airplane);
-    }
-
-    @Override
-    public Optional<Airplane> getById(long id) {
-        return repository.findById(id);
     }
 
     @Override
     public Airplane save(long companyId, Airplane airplane) {
-        var aircompany = getAircompanyById(companyId);
+        var aircompany = aircompanyService.getById(companyId);
+        checkBySerialNumber(airplane.getFactorySerialNumber());
         airplane.setAircompany(aircompany);
         return repository.save(airplane);
     }
 
     @Override
-    public Optional<Airplane> getBySerialNumber(String serialNumber) {
-        return repository.findByFactorySerialNumber(serialNumber);
+    public void checkBySerialNumber(String serialNumber) {
+        repository.findByFactorySerialNumber(serialNumber).ifPresent(a->{
+            throw new AirplaneDuplicateSerialNumberException("Airplane with serial number "
+                    + serialNumber + " already exists");
+        });
     }
 
-    private Aircompany getAircompanyById(long id) {
-        return aircompanyService.getById(id).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", id))
-        );
+    @Override
+    public Airplane getById(long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Airplane with id + %d not found", id)));
     }
 }
