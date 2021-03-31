@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ua.com.lena.flights.entities.Aircompany;
 import ua.com.lena.flights.exceptions.AircompanyDuplicateNameException;
 import ua.com.lena.flights.exceptions.EntityNotFoundException;
+import ua.com.lena.flights.exceptions.messages.ExceptionMessage;
 import ua.com.lena.flights.repository.AircompanyRepository;
 import ua.com.lena.flights.service.AircompanyService;
 
@@ -43,13 +44,13 @@ public class AircompanyServiceImpl implements AircompanyService {
     @Override
     public void checkIfPresentByName(String name) {
         repository.findByName(name).ifPresent(a -> {
-            throw new AircompanyDuplicateNameException(String.format("Airplane with name %s already exists", name));
+            throw new AircompanyDuplicateNameException(ExceptionMessage.AIRCOMPANY_WITH_NAME_EXISTS + name);
         });
     }
 
     @Override
     public Aircompany getById(long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Aircompany with id + %d not found", id)));
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.AIRCOMPANY_BY_ID_NOT_FOUND + id));
     }
 }

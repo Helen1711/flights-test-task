@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ua.com.lena.flights.entities.Airplane;
 import ua.com.lena.flights.exceptions.AirplaneDuplicateSerialNumberException;
 import ua.com.lena.flights.exceptions.EntityNotFoundException;
+import ua.com.lena.flights.exceptions.messages.ExceptionMessage;
 import ua.com.lena.flights.repository.AirplaneRepository;
 import ua.com.lena.flights.service.AircompanyService;
 import ua.com.lena.flights.service.AirplaneService;
@@ -36,15 +37,16 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public void checkBySerialNumber(String serialNumber) {
-        repository.findByFactorySerialNumber(serialNumber).ifPresent(a->{
-            throw new AirplaneDuplicateSerialNumberException("Airplane with serial number "
-                    + serialNumber + " already exists");
+        repository.findByFactorySerialNumber(serialNumber).ifPresent(a -> {
+            throw new AirplaneDuplicateSerialNumberException(
+                    ExceptionMessage.AIRPLANE_WITH_SERIAL_NUMBER_EXISTS + serialNumber
+            );
         });
     }
 
     @Override
     public Airplane getById(long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Airplane with id + %d not found", id)));
+                .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.AIRPLANE_BY_ID_NOT_FOUND + id));
     }
 }
