@@ -26,40 +26,22 @@ public class AircompanyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aircompany> getAircompany(@PathVariable long id) {
-        return service.getById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Aircompany getAircompany(@PathVariable long id) {
+        return service.getById(id);
     }
 
     @PostMapping
     public ResponseEntity<Airplane> create(@RequestBody @Valid Aircompany aircompany) {
-        if (service.getByName(aircompany.getName()).isPresent()) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
-        Aircompany savedAircompany = service.save(aircompany);
-        return new ResponseEntity(savedAircompany, HttpStatus.CREATED);
+        return new ResponseEntity(service.save(aircompany), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable long id, @RequestBody @Valid Aircompany aircompany) {
-        return service.getById(id)
-                .map(company -> {
-                    service.update(id, aircompany);
-                    return ResponseEntity.ok().build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public Aircompany update(@PathVariable long id, @RequestBody @Valid Aircompany aircompany) {
+        return service.update(id, aircompany);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
-        if (service.getById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        if (service.remove(id) > 0) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.unprocessableEntity().build();
-        }
+        return service.remove(id) > 0 ? ResponseEntity.noContent().build() : ResponseEntity.unprocessableEntity().build();
     }
 }
