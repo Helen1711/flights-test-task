@@ -1,9 +1,11 @@
 package ua.com.lena.flights.service.impl;
 
 import org.springframework.stereotype.Service;
+import ua.com.lena.flights.entities.Airplane;
 import ua.com.lena.flights.entities.Flight;
 import ua.com.lena.flights.entities.FlightStatus;
 import ua.com.lena.flights.exceptions.EntityNotFoundException;
+import ua.com.lena.flights.exceptions.FlightDistanceException;
 import ua.com.lena.flights.repository.FlightRepository;
 import ua.com.lena.flights.service.AircompanyService;
 import ua.com.lena.flights.service.AirplaneService;
@@ -50,6 +52,7 @@ public class FlightServiceImpl implements FlightService {
                 .orElseThrow(
                         () -> new EntityNotFoundException(String.format("Airplane with id + %d not found", airplaneId))
                 );
+        checkFlightDistance(flight, airplane);
         flight.setAircompany(aircompany);
         flight.setAirplane(airplane);
         return repository.save(flight);
@@ -71,5 +74,11 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<Flight> getAllWhereEstimatedTimeBiggerThanActual() {
         return repository.findAllWhereEstimatedTimeBiggerThanActual();
+    }
+
+    private void checkFlightDistance(Flight flight, Airplane airplane){
+        if(flight.getDistance() > airplane.getFlightDistance()){
+            throw new FlightDistanceException(String.format("Distance %s is too long", flight.getDistance()));
+        }
     }
 }
