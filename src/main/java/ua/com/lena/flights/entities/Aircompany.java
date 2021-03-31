@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Aircompany extends AbstractEntity {
     @Size(min = 3, max = 20)
     @Column(unique = true)
+    @NotNull
     private String name;
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -20,7 +21,7 @@ public class Aircompany extends AbstractEntity {
     public Aircompany() {
     }
 
-    public Aircompany(LocalDate createdAt, @Size(min = 3, max = 20) String name, @NotNull AircompanyType type) {
+    public Aircompany(LocalDate createdAt, @Size(min = 3, max = 20) @NotNull String name, @NotNull AircompanyType type) {
         super(createdAt);
         this.name = name;
         this.type = type;
