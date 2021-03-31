@@ -9,11 +9,12 @@ import java.time.LocalDate;
 
 @Entity
 public class Airplane extends AbstractEntity {
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 40)
     @NotNull
     private String name;
     @Column(name = "factory_serial_number", unique = true)
     @NotNull
+    @Size(min = 3, max = 10)
     private String factorySerialNumber;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aircompany_id")
@@ -34,7 +35,7 @@ public class Airplane extends AbstractEntity {
     public Airplane() {
     }
 
-    public Airplane(LocalDate createdAt, @Size(min = 3, max = 20) @NotNull String name,
+    public Airplane(LocalDate createdAt, @Size(min = 3, max = 40) @NotNull String name,
                     @NotNull String factorySerialNumber, Aircompany aircompany, @PositiveOrZero int numberOfFlights,
                     @Positive double flightDistance, @Positive int fuelCapacity, @NotNull AirplaneType type) {
         super(createdAt);
