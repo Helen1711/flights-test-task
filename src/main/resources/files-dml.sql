@@ -1,6 +1,6 @@
-use flightsTestTask;
+USE flightsTestTask;
 
-insert into aircompany(created_at, name, type)
+INSERT INTO aircompany(created_at, name, type)
 VALUES ('2021-03-03', 'Ryanair', 'LOW_COST'),
        ('2021-02-10', 'Ukraine International Airlines', 'CHARTER'),
        ('2020-07-21', 'Delta Air Lines', 'SCHEDULED'),
@@ -8,9 +8,9 @@ VALUES ('2021-03-03', 'Ryanair', 'LOW_COST'),
        ('2015-04-16', 'Frontier Airlines', 'SCHEDULED'),
        ('2014-02-03', 'JetBlue Airways', 'SCHEDULED');
 
-insert into airplane (created_at, factory_serial_number, flight_distance, fuel_capacity, name, number_of_flights,
+INSERT INTO airplane (created_at, factory_serial_number, flight_distance, fuel_capacity, name, number_of_flights,
                       type, aircompany_id)
-values ('2021-03-03', 'FG35GH', 3987, 7896, 'TY-34', 35, 'CARGO', 1),
+VALUES ('2021-03-03', 'FG35GH', 3987, 7896, 'TY-34', 35, 'CARGO', 1),
        ('2021-02-03', 'FG32GH', 2544, 6784, 'TY-22', 35, 'PASSENGER', 5),
        ('2021-03-14', 'FH35GH', 6457, 7896, 'TY-56', 35, 'PASSENGER', 4),
        ('2020-03-03', 'FG34AH', 3987, 8304, 'TY-76', 35, 'CARGO', 6),
@@ -21,9 +21,9 @@ values ('2021-03-03', 'FG35GH', 3987, 7896, 'TY-34', 35, 'CARGO', 1),
        ('2015-03-03', 'GH325GH', 2367, 7896, 'TY-77', 35, 'PASSENGER', 5),
        ('2016-05-08', 'IO65GH', 3578, 3049, 'TY-89', 35, 'CARGO', 1);
 
-insert into flight(created_at, delay_started_at, departure_country, destination_country, distance, ended_at,
+INSERT INTO flight(created_at, delay_started_at, departure_country, destination_country, distance, ended_at,
                    estimated_flight_time, status, aircompany_id, airplane_id)
-values ('2021-03-03', '2021-03-27 22:38:49', 'Ukraine', 'Poland', 2738,
+VALUES ('2021-03-03', '2021-03-27 22:38:49', 'Ukraine', 'Poland', 2738,
         '2021-03-27 23:38:49', '02:30:10', 'COMPLETED', 1, 1),
        ('2021-02-03', '2021-02-27 22:38:49', 'Ukraine', 'Poland', 2738,
         '2021-02-27 23:38:49', '02:30:10', 'COMPLETED', 1, 1),
