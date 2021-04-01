@@ -63,7 +63,8 @@ public class FlightServiceImpl implements FlightService {
         return repository.findAllWhereEstimatedTimeBiggerThanActual();
     }
 
-    private void checkFlightDistance(Flight flight, Airplane airplane) {
+    @Override
+    public void checkFlightDistance(Flight flight, Airplane airplane) {
         if (flight.getDistance() > airplane.getFlightDistance()) {
             throw new FlightDistanceException(ExceptionMessage.FLIGHT_DISTANCE_LENGTH_EXCESS + flight.getDistance());
         }

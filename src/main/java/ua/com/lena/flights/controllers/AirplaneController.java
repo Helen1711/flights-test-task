@@ -18,8 +18,8 @@ public class AirplaneController {
         this.service = service;
     }
 
-    @PatchMapping("/{airplaneId}/{aircompanyId}")
-    public Airplane changeAircompany(@PathVariable long airplaneId, @PathVariable long aircompanyId) {
+    @PatchMapping
+    public Airplane changeAircompany(@RequestParam long airplaneId, @RequestParam long aircompanyId) {
         return service.changeAircompany(airplaneId, aircompanyId);
     }
 
