@@ -5,8 +5,8 @@ CREATE TABLE aircompany
 (
     id         BIGINT PRIMARY KEY AUTO_INCREMENT,
     created_at DATE,
-    name       VARCHAR(20) UNIQUE NOT NULL,
-    type       enum ('LOW_COST', 'CHARTER', 'SCHEDULED')
+    name       VARCHAR(40) UNIQUE NOT NULL,
+    type       ENUM ('LOW_COST', 'CHARTER', 'SCHEDULED')
 );
 
 CREATE TABLE airplane

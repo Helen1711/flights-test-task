@@ -1,5 +1,6 @@
 package ua.com.lena.flights.service;
 
+import ua.com.lena.flights.entities.Airplane;
 import ua.com.lena.flights.entities.Flight;
 import ua.com.lena.flights.entities.FlightStatus;
 
@@ -14,6 +15,8 @@ public interface FlightService {
     Flight save(long companyId, long airplaneId, Flight flight);
 
     Flight getById(long id);
+
+    void checkFlightDistance(Flight flight, Airplane airplane);
 
     void changeFlightStatus(long id, FlightStatus status);
 
